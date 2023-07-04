@@ -1,21 +1,35 @@
 from fastapi import FastAPI
-from fastapi.responses import ORJSONResponse
-from fastapi.responses import ORJSONResponse
-from api import api_router
-import orjson
+from fastapi import Request
+from fastapi.responses import PlainTextResponse
+from fastapi.exceptions import RequestValidationError
+from api import (
+    api_router,
+    PrettyORJSON,
+)
 
-class PrettyORJSON(ORJSONResponse):
-    """A modified version of the ORJSONResponse 
-    class that returns an indented JSON response.
-    """
-    def render(self, content: dict[str, str]) -> bytes:
-        return orjson.dumps(
-            content, 
-            option=orjson.OPT_NON_STR_KEYS | orjson.OPT_SERIALIZE_NUMPY | orjson.OPT_INDENT_2,
-        )
+DESC = """CSIT Mini Challenge July 2023 by KJHJason
+
+GitHub: https://github.com/KJHJason
+
+This API is built with Python 3.11 using FastAPI as its framework.
+"""
+INDEX_RESPONSE = {
+    "message": "CSIT Mini Challenge July 2023",
+    "author": "KJHJason",
+    "github": "https://github.com/KJHJason",
+    "api_routes": [
+        "/flight",
+        "/hotel",
+    ],
+    "documentation_routes": [
+        "/docs",
+        "/redoc",
+    ],
+}
 
 app = FastAPI(
-    title="CSIT Mini Challenge July 2023 by KJHJason",
+    title="CSIT Mini Challenge",
+    description=DESC,
     debug=True,
     version="1.0.0",
     default_response_class=PrettyORJSON,
@@ -23,25 +37,19 @@ app = FastAPI(
 )
 app.include_router(api_router)
 
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    return PlainTextResponse(str(exc), status_code=400)
+
 @app.get("/")
-def root():
-    return {
-        "message": "CSIT Mini Challenge July 2023",
-        "author": "KJHJason",
-        "Routes": [
-            "/flight",
-            "/hotel",
-            "/docs",
-            "/redoc",
-        ],
-    }
+def index():
+    return INDEX_RESPONSE
 
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(
         "main:app", 
-        host="localhost", 
+        host="0.0.0.0", 
         port=8080,
         reload=True,
-        log_level="debug",
     )
