@@ -9,10 +9,10 @@ class Hotel(BaseModel):
     city: str = Field(
         alias="City",
     )
-    chk_in_date: str = Field(
+    check_in_date: str = Field(
         alias="Check In Date",
     )
-    chk_out_date: str = Field(
+    check_out_date: str = Field(
         alias="Check Out Date",
     )
     hotel: str = Field(
@@ -44,6 +44,13 @@ class Flight(BaseModel):
     return_price: int = Field(
         alias="Return Price",
     )
+
+class Index(BaseModel):
+    message: str
+    author: str
+    github: str
+    api_routes: list[str]
+    documentation_routes: list[str]
 
 class PrettyORJSON(ORJSONResponse):
     """A modified version of the ORJSONResponse 

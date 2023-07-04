@@ -118,12 +118,15 @@ async def get_flight(
         hotels_cur = hotels_cur.sort("date", pymongo.ASCENDING)
         async for hotel in hotels_cur:
             hotel_name: str = hotel["hotelName"]
-            if hotel_name not in hotel_map:
-                hotel_map[hotel_name] = [hotel]
-                hotel_price_map[hotel_name] = hotel["price"]
+            if hotel_name in invalid_hotels:
                 continue
 
-            if hotel_name in invalid_hotels:
+            if hotel_name not in hotel_map:
+                if hotel["date"] != chk_in_date:
+                    invalid_hotels.add(hotel_name)
+
+                hotel_map[hotel_name] = [hotel]
+                hotel_price_map[hotel_name] = hotel["price"]
                 continue
 
             # check the previous hotel in the list if there's a continuous date
@@ -140,16 +143,21 @@ async def get_flight(
     if len(hotel_price_map) == 0:
         return []
 
+    # check for invalid hotels that does not reach the check-out date
+    for hotel_name, hotel_list in hotel_map.items():
+        if hotel_name not in invalid_hotels and len(hotel_list) < (chk_out_date - chk_in_date).days + 1:
+            invalid_hotels.add(hotel_name)
+
     cheapest_hotel_price = min(hotel_price_map.values())
-    chk_in_date: str = chk_in_date.strftime("%Y-%m-%d")
-    chk_out_date: str = chk_out_date.strftime("%Y-%m-%d")
+    chk_in_date_str = chk_in_date.strftime("%Y-%m-%d")
+    chk_out_date_str = chk_out_date.strftime("%Y-%m-%d")
     return [
         {
             "City": "Frankfurt",
-            "Check In Date": chk_in_date,
-            "Check Out Date": chk_out_date,
+            "Check In Date": chk_in_date_str,
+            "Check Out Date": chk_out_date_str,
             "Hotel": hotel_name,
             "Price": price,
         }
-        for hotel_name, price in hotel_price_map.items() if price == cheapest_hotel_price
+        for hotel_name, price in hotel_price_map.items() if price == cheapest_hotel_price and hotel_name not in invalid_hotels
     ]

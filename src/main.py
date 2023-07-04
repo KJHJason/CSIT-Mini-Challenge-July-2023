@@ -3,6 +3,7 @@ from fastapi import Request
 from fastapi.responses import PlainTextResponse
 from fastapi.exceptions import RequestValidationError
 from api import (
+    Index,
     api_router,
     PrettyORJSON,
 )
@@ -41,7 +42,7 @@ app.include_router(api_router)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     return PlainTextResponse(str(exc), status_code=400)
 
-@app.get("/")
+@app.get("/", response_model=Index)
 def index():
     return INDEX_RESPONSE
 
