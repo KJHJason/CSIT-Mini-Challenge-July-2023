@@ -35,7 +35,7 @@ You can use [MongoDB Compass](https://www.mongodb.com/products/compass) to view 
 
 On your API server, you should write two endpoints for Mighty Saver Rabbit's friends to query the following routes...
 
-#### GET /flight
+### GET /flight
 
 Get a list of return flights at the cheapest price, given the destination city, departure date, and arrival date.
 
@@ -74,7 +74,7 @@ Example Response:
 ]
 ```
 
-#### GET /hotel
+### GET /hotel
 
 Get a list of hotels providing the cheapest price, given the destination city, check-in date, and check-out date.
 
