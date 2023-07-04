@@ -6,6 +6,7 @@ Mini Challenge: Help Mighty Saver Rabbit!
 Mighty Saver Rabbit is trying to find the best travel deals across the internet for his friends. Will you help him solve this with some savvy backend development tricks?
 
 [Start your challenge here!](https://go.gov.sg/se-minichallenge)
+
 This Mini Challenge on Backend Development is open from 4 July to 23 July 2023.
 
 ## Mini Challenge Description
