@@ -1,5 +1,7 @@
-from fastapi import FastAPI
-from fastapi import Request
+from fastapi import (
+    FastAPI,
+    Request,
+)
 from fastapi.responses import PlainTextResponse
 from fastapi.exceptions import RequestValidationError
 from api import (
