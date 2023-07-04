@@ -8,7 +8,7 @@ Mighty Saver Rabbit is trying to find the best travel deals across the internet 
 [Start your challenge here!](https://go.gov.sg/se-minichallenge)
 This Mini Challenge on Backend Development is open from 4 July to 23 July 2023.
 
-### Mini Challenge Description
+## Mini Challenge Description
 
 Mighty Saver Rabbit needs your help!
 As a travel enthusiast, Mighty Saver Rabbit is on the lookout for the cheapest flights and hotels for an upcoming trip with his friends.
@@ -19,7 +19,7 @@ To solve this problem, Mighty Saver Rabbit decided to populate all the informati
 
 Follow the instructions below to complete the challenge and help Mighty Saver Rabbit!
 
-### Instructions
+## Instructions
 
 On some paper and pen, Mighty Saver Rabbit eagerly scribbled down his idea:
 
@@ -35,7 +35,7 @@ You can use [MongoDB Compass](https://www.mongodb.com/products/compass) to view 
 
 On your API server, you should write two endpoints for Mighty Saver Rabbit's friends to query the following routes...
 
-### GET /flight
+## GET /flight
 
 Get a list of return flights at the cheapest price, given the destination city, departure date, and arrival date.
 
@@ -78,7 +78,7 @@ Example Response:
 ]
 ```
 
-### GET /hotel
+## GET /hotel
 
 Get a list of hotels providing the cheapest price, given the destination city, check-in date, and check-out date.
 
@@ -119,8 +119,10 @@ Example Response:
 ]
 ```
 
-### Important: For your API server to be verified after submission, please run your server on port 8080
+## Important Note
 
-### Proof of Completion
+For your API server to be verified after submission, please run your server on port 8080
+
+## Proof of Completion
 
 ![Proof of Completion](/res/proof.png)
