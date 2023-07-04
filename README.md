@@ -40,6 +40,7 @@ On your API server, you should write two endpoints for Mighty Saver Rabbit's fri
 Get a list of return flights at the cheapest price, given the destination city, departure date, and arrival date.
 
 Query Parameters:
+
 Field          | Type   | Description
 -------------- | ------ | -------------------------------------------------
 departureDate  | String | Departure date from Singapore (ISO date format).
@@ -47,15 +48,18 @@ returnDate     | String | Return date from destination city (ISO date format).
 destination    | String | Destination city (case-insensitive).
 
 Responses:
+
 Status Code | Description
 ----------- | -----------------------------------------
 200         | Query successful.
 400         | Bad input. Missing query parameters or incorrect date format.
 
 Response Format:
+
 Returns an array containing the details of the cheapest return flights. There can be 0 or more items returned.
 
 Example Query:
+
 `/flight?departureDate=2023-12-10&returnDate=2023-12-16&destination=Frankfurt`
 
 Example Response:
@@ -79,6 +83,7 @@ Example Response:
 Get a list of hotels providing the cheapest price, given the destination city, check-in date, and check-out date.
 
 Query Parameters:
+
 Field          | Type   | Description
 -------------- | ------ | -------------------------------------------------
 checkInDate    | String | Date of check-in at the hotel.
@@ -86,15 +91,18 @@ checkOutDate   | String | Date of check-out from the hotel.
 destination    | String | Destination city (case-insensitive).
 
 Responses:
+
 Status Code | Description
 ----------- | -----------------------------------------
 200         | Query successful.
 400         | Bad input. Missing query parameters or incorrect date format.
 
 Response Format:
+
 Returns an array containing the details of the cheapest hotels. There can be 0 or more items returned.
 
 Example Query:
+
 `/hotel?checkInDate=2023-12-10&checkOutDate=2023-12-16&destination=Frankfurt`
 
 Example Response:
